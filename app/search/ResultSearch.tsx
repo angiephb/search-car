@@ -66,6 +66,9 @@ export const ResultSearch = ({ initialData, query }: ResultProps) => {
                             src={car.image}
                             alt={`${car.name} ${car.model}`}
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            onError={(e) => {
+                                e.currentTarget.src = "https://placehold.co/600x400/f3f4f6/9ca3af?text=Imagen+No+Disponible";
+                            }}
                         />
                         <div className="absolute top-4 right-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md px-3 py-1 rounded-full shadow-sm">
                             <div className="flex items-baseline gap-1">

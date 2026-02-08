@@ -44,6 +44,9 @@ export const SummaryPage = () => {
                                     src={selectedCar.image}
                                     alt={selectedCar.name}
                                     className="w-full h-64 object-cover"
+                                    onError={(e) => {
+                                        e.currentTarget.src = "https://placehold.co/600x400/f3f4f6/9ca3af?text=Imagen+No+Disponible";
+                                    }}
                                 />
                             </div>
                         </div>
