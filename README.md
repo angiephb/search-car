@@ -43,8 +43,11 @@ Para el desarrollo de esta prueba tuve en cuenta principalmente la escalabilidad
 
 * Usé TypeScript para tipar los datos que vienen de la API y definir las interfaces necesarias para asegurar un flujo correcto dentro del proyecto.
 
+## INTEGRACION PASARELA DE PAGO
 
+Para integrar esta aplicación con una pasarela de pago, buscaría una API de un proveedor externo como Place to Pay o MercadoPago.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+De acuerdo con el flujo que estoy manejando en el proyecto, mi intención es que después de que el cliente seleccione el auto que desea, pase a un checkout, donde se muestre el resumen del vehículo con el valor total, y desde esa misma vista pueda realizar la compra, evitando generar pasos innecesarios durante la navegación.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Una vez que el usuario ingrese los datos requeridos y el frontend los valide, la información se enviaría al backend, el cual se encargaría de comunicarse con la pasarela de pago, manejar los datos sensibles y garantizar la seguridad de la transacción.
+Después de recibir la respuesta del proveedor de pagos, el backend la devolvería al frontend y este mostraría al cliente el estado de su compra (aprobada, rechazada o pendiente), según corresponda.
