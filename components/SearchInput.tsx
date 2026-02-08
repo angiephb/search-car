@@ -13,6 +13,8 @@ export const SearchInput = ({ data }: { data: city[] }) => {
         endDate: "",
     });
 
+    const today = new Date().toISOString().split('T')[0];
+
     const [error, setError] = useState(false);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -80,6 +82,7 @@ export const SearchInput = ({ data }: { data: city[] }) => {
                         className="w-full rounded-xl bg-gray-50 dark:bg-gray-800 border-2 border-transparent focus:border-sky-500 py-3 px-4 text-gray-700 dark:text-gray-200 outline-none transition-all duration-200"
                         value={dataInput.startDate}
                         onChange={handleChange}
+                        min={today}
                     />
                 </div>
 
@@ -95,6 +98,7 @@ export const SearchInput = ({ data }: { data: city[] }) => {
                         className="w-full rounded-xl bg-gray-50 dark:bg-gray-800 border-2 border-transparent focus:border-sky-500 py-3 px-4 text-gray-700 dark:text-gray-200 outline-none transition-all duration-200"
                         value={dataInput.endDate}
                         onChange={handleChange}
+                        min={dataInput.startDate || today}
                     />
                 </div>
 
