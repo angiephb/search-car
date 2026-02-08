@@ -140,15 +140,12 @@ const carList = [
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
-    //const query = searchParams.get("query")?.toLowerCase() || "";
     const rawQuery = decodeURIComponent(searchParams.get("query") || "").toLowerCase();
 
     const filtered = carList.filter(element => {
         const city = element.cityName.toLowerCase();
         return rawQuery.includes(city);
-    }
-        //`${element.name} ${element.model} ${element.cityName}`.toLowerCase().includes(rawQuery)
-    );
+    });
 
     return NextResponse.json(filtered);
 }

@@ -11,6 +11,7 @@ export type car = {
 
 export interface CarState {
   results: car[];
+  selectedCar: car | null;
   loading: boolean;
   error: string | null;
 }

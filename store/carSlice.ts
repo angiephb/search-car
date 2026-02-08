@@ -3,23 +3,38 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState: CarState = {
     results: [],
+    selectedCar: null,
     loading: false,
     error: null
 };
 
 const getCars = createAsyncThunk(
     'cars/fetchCars',
-    async (query: string) => {
-        const response = await fetch(`/api/cars?query=${encodeURIComponent(query)}`);
-        const data:car[]= await response.json();
-        return data;
+    async (query: string, { rejectWithValue }) => {
+        try {
+            const response = await fetch(`/api/cars?query=${encodeURIComponent(query)}`);
+            if (!response.ok) {
+                return rejectWithValue("Error al obtener los vehículos");
+            }
+            const data: car[] = await response.json();
+            return data;
+        } catch (error) {
+            return rejectWithValue("Ocurrió un error inesperado");
+        }
     }
 );
 
 const carSlice = createSlice({
     name: "carResults",
     initialState,
-    reducers: {},
+    reducers: {
+        setSelectedCar: (state, action) => {
+            state.selectedCar = action.payload;
+        },
+        clearSelectedCar: (state) => {
+            state.selectedCar = null;
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(getCars.pending, (state) => {
             state.loading = true;
@@ -37,4 +52,5 @@ const carSlice = createSlice({
 })
 
 export default carSlice.reducer;
+export const { setSelectedCar, clearSelectedCar } = carSlice.actions;
 export { getCars };

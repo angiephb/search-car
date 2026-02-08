@@ -40,7 +40,7 @@ const cityList = [
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
-    const query = searchParams.get("query")?.toLowerCase() || "";
+    const query = (searchParams.get("query") || "").toLowerCase()
 
     const filtered = cityList.filter(element =>
         `${element.airportName} ${element.cityName}`.toLowerCase().includes(query)
